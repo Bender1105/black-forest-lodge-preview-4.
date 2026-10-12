@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Contacts | Black Forest Lodge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="emergency-header">
+    <a href="index.html" class="back-link">
+      ← Back to Home
+    </a>
+
+    <p class="eyebrow">BLACK FOREST LODGE</p>
+    <h1>Emergency & Important Contacts</h1>
+    <p>
+      Important information for your safety
+      and peace of mind.
+    </p>
+  </header>
+
+  <main class="emergency-content">
+
+    <section class="emergency-card">
+      <p class="eyebrow">PROPERTY LOCATION</p>
+      <h2>Lodge Address</h2>
+
+      <p class="property-address" id="propertyAddress">
+        245 Cherokee Path Way<br>
+        Sevierville, TN 37876
+      </p>
+
+      <button class="contact-button"
+              type="button"
+              onclick="copyAddress()">
+        Copy Property Address
+      </button>
+
+      <p id="copyMessage" class="copy-message"
+         role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="emergency-card emergency-primary">
+      <p class="eyebrow">IMMEDIATE ASSISTANCE</p>
+      <h2>Police, Fire & Medical Emergencies</h2>
+      <p class="emergency-number">911</p>
+
+      <p>
+        For fires, medical emergencies,
+        crimes in progress, or immediate danger,
+        call 911.
+      </p>
+
+      <a class="contact-button primary-button"
+         href="tel:911">
+        Call 911
+      </a>
+    </section>
+
+    <section class="emergency-card">
+      <p class="eyebrow">NATURAL GAS EMERGENCIES</p>
+      <h2>Sevier County Utility District</h2>
+
+      <p class="contact-number">865-453-3272</p>
+
+      <p>
+        If you smell gas or suspect a gas leak,
+        leave the building immediately.
+        Do not operate light switches,
+        electrical devices, or appliances.
+      </p>
+
+      <p>
+        Once you are safely outside and away
+        from the building, call 911 and
+        Sevier County Utility District.
+        Do not reenter until emergency
+        personnel say it is safe.
+      </p>
+
+      <a class="contact-button"
+         href="tel:+18654533272">
+        Call Gas Emergency Line
+      </a>
+    </section>
+
+    <section class="emergency-card">
+      <p class="eyebrow">NON-EMERGENCY ASSISTANCE</p>
+      <h2>Sevier County Sheriff's Office</h2>
+
+      <p class="contact-number">865-453-4668</p>
+
+      <p>
+        For non-emergency law enforcement
+        assistance. For immediate danger,
+        always call 911.
+      </p>
+
+      <a class="contact-button"
+         href="tel:+18654534668">
+        Call Sheriff's Office
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>BLACK FOREST LODGE</p>
+    <span>Settle in. Stay awhile.</span>
+  </footer>
+
+  <script>
+    function copyAddress() {
+      const address =
+        "245 Cherokee Path Way, Sevierville, TN 37876";
+
+      const message =
+        document.getElementById("copyMessage");
+
+      if (navigator.clipboard &&
+          window.isSecureContext) {
+        navigator.clipboard.writeText(address)
+          .then(() => {
+            message.textContent =
+              "Address copied to clipboard.";
+          })
+          .catch(() => {
+            message.textContent =
+              "Unable to copy. Please select the address above.";
+          });
+      } else {
+        message.textContent =
+          "Please select and copy the address above.";
+      }
+    }
+  </script>
+
+</body>
+</html>

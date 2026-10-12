@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Explore Attractions | Black Forest Lodge</title>
+
+  <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+
+  <main class="explore-page">
+
+    <a href="explore.html" class="explore-back">
+      &larr; Explore the Smokies
+    </a>
+
+    <header class="explore-header">
+      <p class="explore-eyebrow">
+        BLACK FOREST LODGE
+      </p>
+
+      <h1>Explore Attractions</h1>
+
+      <p>
+        Discover memorable experiences
+        throughout the Smoky Mountains.
+      </p>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="attraction-search">
+      <label for="attractionSearch">
+        Find Your Next Adventure
+      </label>
+
+      <input
+        type="search"
+        id="attractionSearch"
+        placeholder="Search attractions, dining, activities..."
+      >
+    </div>
+
+    <!-- CATEGORY FILTERS -->
+    <div class="attraction-filters">
+      <button class="filter-btn active"
+              data-category="All">All</button>
+
+      <button class="filter-btn"
+              data-category="Dining">Dining</button>
+
+      <button class="filter-btn"
+              data-category="Theme Parks">Theme Parks</button>
+
+      <button class="filter-btn"
+              data-category="Adventure">Adventure</button>
+
+      <button class="filter-btn"
+              data-category="Shopping">Shopping</button>
+
+      <button class="filter-btn"
+              data-category="Relaxation">Relaxation</button>
+
+      <button class="filter-btn"
+              data-category="Favorites">Family Favorites</button>
+    </div>
+
+    <!-- ATTRACTION CARDS APPEAR HERE -->
+    <div id="attractionsGrid"
+         class="attractions-grid"></div>
+
+    <p id="noResults"
+       class="attraction-no-results"
+       hidden>
+      No matching attractions found.
+    </p>
+
+  </main>
+
+  <script src="../JS/attractions.js"></script>
+
+</body>
+</html>
