@@ -1,41 +1,150 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Plan My Trip | Black Forest Lodge</title>
+  <title>Plan My Trip | Black Forest Lodge</title>
 
-    <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
 <body>
+  <main class="explore-page">
 
-    <main class="explore-page">
+    <a href="explore.html" class="explore-back">
+      &larr; Back to Explore
+    </a>
 
-        <a href="explore.html" class="explore-back">
-            &larr; Explore the Smokies
-        </a>
+    <header class="explore-header">
+      <p class="explore-eyebrow">BLACK FOREST LODGE</p>
 
-        <header class="explore-header">
+      <h1>Plan My Trip</h1>
 
-            <p class="explore-eyebrow">
-                BLACK FOREST LODGE
-            </p>
+      <p>
+        Make the most of your Smoky Mountain getaway.
+        Choose your travel dates to begin creating
+        your personalized itinerary.
+      </p>
+    </header>
 
-            <h1>Plan My Trip</h1>
+    <section class="planner-section">
 
-            <p>
-                Your personal Smoky Mountain
-                itinerary builder is coming soon.
-            </p>
+      <h2>When Will You Be Visiting?</h2>
 
-        </header>
+      <p>
+        Enter your check-in and check-out dates below.
+      </p>
 
-    </main>
+      <form id="tripDatesForm">
 
+        <div class="planner-date-fields">
+
+          <label>
+            Check-In Date
+            <input type="date" id="checkInDate" required>
+          </label>
+
+          <label>
+            Check-Out Date
+            <input type="date" id="checkOutDate" required>
+          </label>
+
+        </div>
+
+        <button type="submit" class="planner-button">
+          Create My Itinerary
+        </button>
+
+      </form>
+
+      <p id="plannerMessage" aria-live="polite"></p>
+
+    </section>
+
+
+<section id="itineraryResults" class="planner-section" hidden>
+
+<!-- TRIP OVERVIEW -->
+<div class="trip-overview">
+
+  <p class="trip-overview-eyebrow">
+    YOUR MOUNTAIN ESCAPE
+  </p>
+
+  <h2>Welcome to Your Getaway</h2>
+
+  <div class="trip-overview-details">
+
+    <div class="trip-overview-item">
+      <span>CHECK-IN</span>
+      <strong id="tripArrival">—</strong>
+    </div>
+
+    <div class="trip-overview-divider"></div>
+
+    <div class="trip-overview-item">
+      <span>CHECK-OUT</span>
+      <strong id="tripDeparture">—</strong>
+    </div>
+
+    <div class="trip-overview-divider"></div>
+
+    <div class="trip-overview-item">
+      <span>LENGTH OF STAY</span>
+      <strong id="tripNights">—</strong>
+    </div>
+
+  </div>
+
+</div>
+<!-- END TRIP OVERVIEW -->
+
+
+  <h2>Your Smoky Mountain Itinerary</h2>
+
+  <p class="planner-intro">
+    Your dates are set! Discover local attractions and
+    add them to your itinerary, or create your own
+    activities for each day.
+  </p>
+
+  <div class="planner-navigation">
+
+    <a href="attractions.html" class="planner-browse-link">
+      Browse Attractions &rarr;
+    </a>
+
+    <p>
+      Want to plan something personal instead?
+      Use the <strong>+ Add My Own Activity</strong>
+      button beneath any day.
+    </p>
+
+  </div>
+
+
+<!-- PRINT ITINERARY -->
+<div class="planner-print-actions">
+  <button
+    type="button"
+    id="printItineraryButton"
+    class="planner-print-button"
+    onclick="window.print()"
+  >
+    Print / Save My Itinerary
+  </button>
+</div>
+
+
+  <div id="itineraryDays"></div>
+
+</section>
+
+
+  </main>
+
+  <script src="../JS/planner.js"></script>
 </body>
 </html>

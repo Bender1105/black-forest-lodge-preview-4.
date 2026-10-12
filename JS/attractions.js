@@ -338,7 +338,7 @@ const attractions = [
     website: "https://www.google.com/search?q=Diva+Nail+Spa+Sevierville+Pigeon+Forge"
   },
   {
-    name: "M Blessed Spa",
+    name: "B Blessed Spa",
     category: "Relaxation",
     location: "Smoky Mountains Area",
     description: "A spa option for slowing down and enjoying a little well-deserved self-care.",
@@ -438,8 +438,137 @@ grid.innerHTML = "";
     link.rel = "noopener noreferrer";
     link.textContent = "Visit Website →";
 
-    card.append(description, link);
-    grid.appendChild(card);
+    
+card.append(description, link);
+
+// Add an attraction to the guest's itinerary
+const addTripButton = document.createElement("button");
+addTripButton.type = "button";
+addTripButton.className = "attraction-trip-button";
+addTripButton.textContent = "+ Add to My Trip";
+
+const tripDaySelector = document.createElement("div");
+tripDaySelector.className = "attraction-trip-selector";
+tripDaySelector.hidden = true;
+
+addTripButton.addEventListener("click", () => {
+  const checkIn = localStorage.getItem("bflCheckIn");
+  const checkOut = localStorage.getItem("bflCheckOut");
+
+  if (!checkIn || !checkOut || checkOut <= checkIn) {
+    window.location.href = "planner.html";
+    return;
+  }
+
+  tripDaySelector.hidden = !tripDaySelector.hidden;
+
+  if (tripDaySelector.hidden) {
+    return;
+  }
+
+  tripDaySelector.innerHTML = "";
+
+  const instructions = document.createElement("p");
+  instructions.textContent = "Which day would you like to visit?";
+  tripDaySelector.appendChild(instructions);
+
+  const startDate = new Date(checkIn + "T12:00:00");
+  const endDate = new Date(checkOut + "T12:00:00");
+  const currentDate = new Date(startDate);
+
+  while (currentDate < endDate) {
+    const dateKey = [
+      currentDate.getFullYear(),
+      String(currentDate.getMonth() + 1).padStart(2, "0"),
+      String(currentDate.getDate()).padStart(2, "0")
+    ].join("-");
+
+    const dateLabel = currentDate.toLocaleDateString(
+      "en-US",
+      {
+        weekday: "short",
+        month: "short",
+        day: "numeric"
+      }
+    );
+
+    const dayButton = document.createElement("button");
+    dayButton.type = "button";
+    dayButton.className = "attraction-day-button";
+    dayButton.textContent = dateLabel;
+
+    dayButton.addEventListener("click", () => {
+      let activities = [];
+
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem("bflTripActivities") || "[]"
+        );
+
+        if (Array.isArray(saved)) {
+          activities = saved;
+        }
+      } catch (error) {
+        activities = [];
+      }
+
+      // Prevent accidentally adding the same attraction
+      // more than once to the same day
+      const alreadyAdded = activities.some(
+        (activity) =>
+          activity.date === dateKey &&
+          activity.attractionName === place.name
+      );
+
+      if (alreadyAdded) {
+        instructions.textContent =
+          "This attraction is already on that day's itinerary.";
+        return;
+      }
+
+      activities.push({
+        id: crypto.randomUUID(),
+        date: dateKey,
+        name: place.name,
+        attractionName: place.name,
+        time: "",
+        notes: "",
+        custom: false
+      });
+
+      localStorage.setItem(
+        "bflTripActivities",
+        JSON.stringify(activities)
+      );
+
+
+tripDaySelector.innerHTML = "";
+tripDaySelector.hidden = false;
+
+const confirmation = document.createElement("p");
+confirmation.className = "attraction-added-message";
+confirmation.textContent =
+  `Added to your itinerary for ${dateLabel}!`;
+
+const viewTripLink = document.createElement("a");
+viewTripLink.href = "planner.html";
+viewTripLink.className = "attraction-view-trip-link";
+viewTripLink.textContent = "View My Itinerary →";
+
+tripDaySelector.append(confirmation, viewTripLink);
+
+addTripButton.textContent = "+ Add to Another Day";
+
+    });
+
+    tripDaySelector.appendChild(dayButton);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+});
+
+card.append(addTripButton, tripDaySelector);
+grid.appendChild(card);
+
   });
 
   noResults.hidden = filtered.length !== 0;
